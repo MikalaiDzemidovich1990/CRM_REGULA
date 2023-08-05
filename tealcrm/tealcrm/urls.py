@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('register/', include('userprofile.urls')),
     path('dashboard/', include('dashboard.urls')),
-    # path('client/', include('client.urls')),
+    path('clients/', include('client.urls')),
     # path('', include('userprofile.urls')),
     path('admin/', admin.site.urls),
 
