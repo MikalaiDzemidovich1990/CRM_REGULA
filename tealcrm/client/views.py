@@ -46,3 +46,22 @@ def clients_edit(request, pk):
     return render(request, 'client/clients_edit.html',{
         'form':form
     })
+
+@login_required
+def client_add(request):
+    if request.method=="POST":
+        form=AddClientForm(request.POST)
+
+        if form.is_valid():
+            client=form.save()
+            client.create_by=request.user
+            client.save()
+
+            messages.success(request, "Client was created !")
+
+            return redirect('clients_list')
+    else:
+        form=AddClientForm()
+    return redirect(request, "client/client_add.html", {
+        "form":form
+    })
