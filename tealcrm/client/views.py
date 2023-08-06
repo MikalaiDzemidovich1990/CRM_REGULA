@@ -53,7 +53,8 @@ def client_add(request):
         form=AddClientForm(request.POST)
 
         if form.is_valid():
-            client=form.save()
+
+            client=form.save(commit=False)
             client.create_by=request.user
             client.save()
 
@@ -62,6 +63,8 @@ def client_add(request):
             return redirect('clients_list')
     else:
         form=AddClientForm()
-    return redirect(request, "client/client_add.html", {
+    return render(request, "client/add_client.html", {
         "form":form
     })
+
+
